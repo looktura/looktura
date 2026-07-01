@@ -192,7 +192,7 @@ export function createPhoneCarousel(container, opts = {}) {
     camera.updateProjectionMatrix();
     // phones (and their screens) ~20% larger on phones; centred, so layout holds
     tilt.scale.setScalar(w <= 768 ? 1.2 : 1);
-    curYOffset = w <= 768 ? -0.05 : yOffset;   // sit a touch higher on phones
+    curYOffset = w <= 768 ? -0.16 : yOffset;   // phones sit a touch lower so the headline/sub clear above
   }
 
   // ---- loop --------------------------------------------------------------
