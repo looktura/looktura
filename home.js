@@ -3,7 +3,7 @@
 // synced captions + dots, nav, FAQ, waitlist, scroll reveals.
 // Graceful fallback when reduced-motion is set or WebGL is unavailable.
 
-import { createPhoneCarousel } from './phone.js?v=108';
+import { createPhoneCarousel } from './phone.js?v=109';
 
 const SCREENS = [
   { url: 'assets/screens/swipe.jpg',   focus: 'center', t: 'Каталог или Лента',   s: 'Свайпай или листай, как удобно' },
@@ -186,6 +186,30 @@ async function init3D() {
         if (wlTex && wantWL !== slot0WL) { car.setSlotMap(0, wantWL ? wlTex : swTex); slot0WL = wantWL; }
       },
     });
+
+    // ---- magnetic snap ------------------------------------------------------
+    // Once a scroll settles inside the pinned hero, gently ease the ring to the
+    // nearest phone so it's easy to stop with a screen dead-on. Driven through
+    // Lenis (not ScrollTrigger.snap) so it never fights the smooth scroll.
+    {
+      const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+      let snapTimer, snapTarget = null;
+      const trySnap = () => {
+        const st = window.__heroST;
+        if (!st) return;
+        const cur = (lenis.scroll ?? window.scrollY);
+        if (cur < st.start - 2 || cur > st.end + 2) { snapTarget = null; return; }  // only within the pinned hero
+        const span = st.end - st.start;
+        if (span <= 0) return;
+        const target = st.start + (Math.round(((cur - st.start) / span) * N) / N) * span;
+        if (Math.abs(target - cur) < 1) { snapTarget = null; return; }   // already resting on a phone
+        if (target === snapTarget) return;                               // already easing to this phone
+        snapTarget = target;
+        lenis.scrollTo(target, { duration: 0.45, easing: easeOut });
+      };
+      // fire only after the scroll settles (debounced), so it never fights an active swipe
+      lenis.on('scroll', () => { clearTimeout(snapTimer); snapTimer = setTimeout(trySnap, 90); });
+    }
 
     initAnchors(lenis);
     car.ready.then(async () => {
