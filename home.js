@@ -3,7 +3,7 @@
 // synced captions + dots, nav, FAQ, waitlist, scroll reveals.
 // Graceful fallback when reduced-motion is set or WebGL is unavailable.
 
-import { createPhoneCarousel } from './phone.js?v=109';
+import { createPhoneCarousel } from './phone.js?v=110';
 
 const SCREENS = [
   { url: 'assets/screens/swipe.jpg',   focus: 'center', t: 'Каталог или Лента',   s: 'Свайпай или листай, как удобно' },
@@ -201,14 +201,18 @@ async function init3D() {
         if (cur < st.start - 2 || cur > st.end + 2) { snapTarget = null; return; }  // only within the pinned hero
         const span = st.end - st.start;
         if (span <= 0) return;
-        const target = st.start + (Math.round(((cur - st.start) / span) * N) / N) * span;
-        if (Math.abs(target - cur) < 1) { snapTarget = null; return; }   // already resting on a phone
+        const step = span / N;
+        const target = st.start + Math.round((cur - st.start) / step) * step;
+        const dist = Math.abs(target - cur);
+        if (dist < 2) { snapTarget = null; return; }                     // already resting on a phone
         if (target === snapTarget) return;                               // already easing to this phone
         snapTarget = target;
-        lenis.scrollTo(target, { duration: 0.45, easing: easeOut });
+        // scale the glide with distance so a mid-position correction reads as a clear magnetic pull
+        const dur = 0.3 + 0.4 * Math.min(1, dist / (step / 2));
+        lenis.scrollTo(target, { duration: dur, easing: easeOut, force: true, lock: true });
       };
-      // fire only after the scroll settles (debounced), so it never fights an active swipe
-      lenis.on('scroll', () => { clearTimeout(snapTimer); snapTimer = setTimeout(trySnap, 90); });
+      // fire promptly once the scroll pauses (debounced), so it never fights an active swipe
+      lenis.on('scroll', () => { clearTimeout(snapTimer); snapTimer = setTimeout(trySnap, 45); });
     }
 
     initAnchors(lenis);

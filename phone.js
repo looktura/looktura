@@ -190,8 +190,15 @@ export function createPhoneCarousel(container, opts = {}) {
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
-    // phones (and their screens) ~20% larger on phones; centred, so layout holds
-    tilt.scale.setScalar(w <= 768 ? 1.2 : 1);
+    // scale to the viewport: bigger on phones, and grow on large desktop monitors
+    // so the ring doesn't look tiny and lost in the whitespace on big screens.
+    const s = w <= 768 ? 1.2
+      : w >= 2400 ? 1.32
+      : w >= 1900 ? 1.22
+      : w >= 1600 ? 1.14
+      : w >= 1300 ? 1.07
+      : 1;
+    tilt.scale.setScalar(s);
     curYOffset = w <= 768 ? -0.16 : yOffset;   // phones sit a touch lower so the headline/sub clear above
   }
 
