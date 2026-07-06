@@ -288,7 +288,7 @@ a:focus-visible{outline:2px solid var(--accent-deep);outline-offset:3px;border-r
 
 /* 2 · definition strip — the manifesto reads itself word by word (scrub) */
 .define{text-align:center}
-.define__t{max-width:840px;margin:0 auto;font-size:clamp(19px,2.4vw,28px);font-weight:600;
+.define__t{max-width:840px;margin:0 auto;padding:0 20px;font-size:clamp(19px,2.4vw,28px);font-weight:600;
   letter-spacing:-.02em;line-height:1.34;color:#2a2724;opacity:1}
 .define__t .w{display:inline-block;will-change:opacity}
 
@@ -352,7 +352,7 @@ a:focus-visible{outline:2px solid var(--accent-deep);outline-offset:3px;border-r
 .faq__ico::before{left:0;right:0;top:8px;height:2px}
 .faq__ico::after{top:0;bottom:0;left:8px;width:2px}
 .faq__item.open .faq__ico{transform:rotate(90deg)}
-.faq__item.open .faq__ico::after{transform:scaleY(0)}
+.faq__item.open .faq__ico::before{transform:scaleX(0)}
 .faq__q:hover .faq__ico::before,.faq__q:hover .faq__ico::after{background:var(--accent)}
 .faq__a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.16,1,.3,1)}
 .faq__item.open .faq__a{grid-template-rows:1fr}
@@ -436,6 +436,34 @@ a:focus-visible{outline:2px solid var(--accent-deep);outline-offset:3px;border-r
   .wait__row{flex-direction:column}
   .wait__btn{width:100%}
   .foot__grid{grid-template-columns:1fr}
+
+  /* ---- mobile reading pass: tighter rhythm, editorial left-align,
+         thumb-sized targets — phones read top-to-bottom, not centre-out ---- */
+  .how,.why,.faq,.boutiques,.start{padding:60px 0}
+  .lenta{padding:60px 0 40px}
+  .final{padding:36px 0 64px}
+  .sec__head{margin-bottom:32px;text-align:left}
+  .sec__title{font-size:clamp(29px,8.6vw,35px);line-height:1.08}
+  .sec__lead{font-size:16.5px;line-height:1.6;margin-top:12px}
+  .eyebrow{margin-bottom:12px}
+  .define__t{font-size:20px;line-height:1.45}
+  .step{padding:24px 20px 26px}
+  .step::before{font-size:30px;top:18px;right:20px}
+  .step__k{font-size:20px}
+  .step__p{font-size:15.5px}
+  .feed{gap:12px;padding:6px 18px 14px}
+  .feed img{width:min(64vw,240px);height:min(88vw,330px)}
+  .feed__cap{font-size:13.5px;text-align:left;padding:0 18px}
+  .boutiques__card{padding:22px 20px}
+  .chip{padding:8px 14px;font-size:13.5px}
+  .faq__q{padding:19px 18px;font-size:16.5px}
+  .faq__a-in p{padding:0 18px 20px;font-size:15.5px}
+  .final__card{padding:32px 20px}
+  .final__title{font-size:clamp(29px,8.6vw,34px)}
+  .final__sub{font-size:16px;margin:14px auto 22px}
+  .start__card{text-align:left;padding:28px 22px}
+  .forstores__card{padding:24px 20px}
+  .forstores__t{font-size:clamp(21px,6.4vw,26px)}
 }
 
 /* ---- reduced motion -------------------------------------- */

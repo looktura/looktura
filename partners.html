@@ -263,6 +263,29 @@
   }
   @media (max-width:560px){
     .bgrid,.plans,.stats,.shots,.frow{grid-template-columns:1fr}
+
+    /* ---- mobile reading pass: tighter rhythm, editorial left-align,
+           thumb-sized targets, 16px inputs (kills iOS focus-zoom) ---- */
+    .csec{padding:56px 0}
+    .chead{margin:0 0 30px;text-align:left}
+    .ctitle{font-size:clamp(29px,8.4vw,34px);line-height:1.08}
+    .clead{font-size:16.5px;line-height:1.6;margin-top:12px}
+    .stat{padding:22px 20px}
+    .stat__n{font-size:30px}
+    .stat__l{margin-top:8px;font-size:14px}
+    .bcard{padding:24px 22px}
+    .bcard p{font-size:15.5px}
+    .plan{padding:26px 22px}
+    .pswitch{justify-content:flex-start;margin-bottom:22px}
+    .pswitch button{padding:11px 16px;font-size:14.5px}
+    .faqi__q{padding:20px 2px;font-size:16.5px}
+    .faqi__a p{font-size:15.5px;padding-bottom:20px}
+    .fcard{padding:22px 18px}
+    .fcard input,.fcard select,.fcard textarea{font-size:16px;padding:13px 14px}
+    .consent{font-size:13.5px}
+    #content .cbtn{display:block;width:100%;text-align:center;padding:16px 22px;font-size:16px}
+    .final-card{padding:38px 22px}
+    .pnote{font-size:13.5px;text-align:left}
   }
 </style>
 <script type="importmap">
