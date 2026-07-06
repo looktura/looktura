@@ -3,7 +3,7 @@
 // synced captions + dots, nav, FAQ, waitlist, scroll reveals.
 // Graceful fallback when reduced-motion is set or WebGL is unavailable.
 
-import { createPhoneCarousel } from './phone.js?v=113';
+import { createPhoneCarousel } from './phone.js?v=114';
 
 const SCREENS = [
   { url: 'assets/screens/swipe.jpg',   focus: 'center', t: 'Лента вещей',          s: 'Всё в наличии, всё рядом' },
@@ -147,6 +147,7 @@ function initSectionMotion() {
 function initFeedDrag() {
   const feed = $('.feed');
   if (!feed || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  $$('img', feed).forEach((i) => { i.draggable = false; });   // no ghost-image on grab
   let down = false, startX = 0, startScroll = 0, vel = 0, lastX = 0, lastT = 0, raf = 0;
   feed.addEventListener('pointerdown', (e) => {
     down = true; feed.classList.add('is-drag');

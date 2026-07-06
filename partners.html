@@ -6,10 +6,13 @@
 <title>LOOKTURA — партнёрам</title>
 <meta name="description" content="LOOKTURA для магазинов: цифровая витрина и целевые визиты покупателей. 0% комиссии с продаж, первый месяц бесплатно, цена раннего партнёра — навсегда." />
 <meta name="theme-color" content="#F4F0E8" />
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="LOOKTURA — партнёрам" />
 <meta property="og:description" content="Доведём покупателя до вашей двери. Витрина и целевые визиты без комиссий с продаж." />
 <meta property="og:locale" content="ru_RU" />
+<meta property="og:url" content="https://looktura.github.io/partners.html" />
+<meta property="og:image" content="https://looktura.github.io/assets/screens/store.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -47,6 +50,16 @@
   .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--lav),var(--pink));border-radius:0 3px 3px 0;
     transition:width .12s linear;box-shadow:0 0 12px rgba(237,140,237,.6)}
 
+  /* branded chrome — parity with the client page */
+  ::selection{background:rgba(154,119,238,.28);color:var(--ink)}
+  ::-moz-selection{background:rgba(154,119,238,.28);color:var(--ink)}
+  html{scrollbar-width:thin;scrollbar-color:rgba(110,90,130,.45) transparent}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--lav-deep);outline-offset:3px;border-radius:6px}
+  .faqi__q:focus-visible{outline-offset:-3px}
+  body::after{content:"";position:fixed;inset:0;z-index:50;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:160px 160px;opacity:.03}
+
   /* narrative captions — cinematic intertitles straight over the city,
      no card box: gradient step number, one big line, one short line */
   .panel{position:absolute;left:50%;top:clamp(86px,13vh,170px);transform:translateX(-50%) translateY(12px);
@@ -69,26 +82,11 @@
   /* the closing caption sits low, leaving the boutique and its red pin in clear view */
   #cta{top:auto;bottom:clamp(36px,8vh,84px)}
 
-  /* the scroll hint at the very start */
-  .hint{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;
-    font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--lav-deep);opacity:.85;
-    transition:opacity .4s ease}
-  .hint svg{width:20px;height:20px;animation:bob 1.6s ease-in-out infinite}
   @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 
-  /* arrival form */
-  .form-card{display:flex;flex-direction:column;gap:12px}
+  /* form field labels (application form below) */
   .field{display:flex;flex-direction:column;gap:6px}
   .field label{font-size:12px;font-weight:600;color:var(--lav-deep);letter-spacing:.02em}
-  .field input{font:inherit;font-size:15px;padding:12px 15px;border-radius:13px;border:1px solid rgba(110,90,130,.22);
-    background:rgba(255,255,255,.7);color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s}
-  .field input:focus{border-color:var(--lav);box-shadow:0 0 0 4px rgba(158,139,175,.18)}
-  .submit{margin-top:4px;font:inherit;font-weight:700;font-size:15.5px;color:#fff;border:0;cursor:pointer;
-    padding:14px 18px;border-radius:14px;background:linear-gradient(135deg,var(--lav),var(--lav-deep));
-    box-shadow:0 12px 26px rgba(110,90,130,.34);transition:transform .15s,box-shadow .2s}
-  .submit:hover{transform:translateY(-1px);box-shadow:0 16px 32px rgba(110,90,130,.42)}
-  .note{margin:2px 0 0;font-size:12.5px;color:var(--ink-soft);opacity:.85}
-  .ok{display:none;font-size:14.5px;color:var(--lav-deep);font-weight:600;padding:6px 0}
 
   /* fallback / loading */
   #fallback{position:fixed;inset:0;z-index:3;display:grid;place-items:center;background:#CFE3F4;
