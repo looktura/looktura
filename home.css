@@ -263,13 +263,19 @@ a:focus-visible{outline:2px solid var(--accent-deep);outline-offset:3px;border-r
 }
 
 /* how it works */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.step{position:relative;padding:34px 30px;border-radius:var(--r-lg);
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;counter-reset:step}
+.step{position:relative;padding:34px 30px;border-radius:var(--r-lg);counter-increment:step;
   background:linear-gradient(155deg,rgba(255,255,255,.62),rgba(158,139,175,.13));
   border:1px solid var(--line);box-shadow:var(--shadow-soft);
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 .step::after{content:"";position:absolute;inset:0;border-radius:var(--r-lg);
   box-shadow:0 26px 56px rgba(110,90,130,.22);opacity:0;transition:opacity .35s;pointer-events:none}
+/* big gradient step numeral, top-right */
+.step::before{content:"0" counter(step);position:absolute;top:22px;right:26px;
+  font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1;
+  background:linear-gradient(110deg,#EB74F4,#9A77EE 55%,#46AEE8);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  opacity:.9;pointer-events:none}
 .step__k{display:inline-block;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
 .step__k::after{content:"";display:block;width:30px;height:3px;border-radius:3px;background:var(--pop);margin-top:10px;
   transform:scaleX(0);transform-origin:0 50%;transition:transform .6s cubic-bezier(.16,1,.3,1) .35s}
@@ -402,6 +408,9 @@ a:focus-visible{outline:2px solid var(--accent-deep);outline-offset:3px;border-r
 .fallphone img{width:100%;height:auto;display:block}
 @media(max-width:760px){.fallgrid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.fallgrid{grid-template-columns:1fr;max-width:340px}}
+
+/* ---- readability: body copy a notch darker than --muted --- */
+.sec__lead,.step__p,.faq__a-in p,.final__sub,.forstores__p,.feed__cap{color:#645D55}
 
 /* ---- reveal ---------------------------------------------- */
 .rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}

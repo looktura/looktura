@@ -47,20 +47,23 @@
   .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--lav),var(--pink));border-radius:0 3px 3px 0;
     transition:width .12s linear;box-shadow:0 0 12px rgba(237,140,237,.6)}
 
-  /* narrative panels — glass cards, vertically centred on the left */
-  .panel{position:absolute;top:50%;left:clamp(20px,6vw,88px);transform:translateY(-46%) translateY(12px);
-    width:min(516px,90vw);opacity:0;transition:opacity .2s ease, transform .3s cubic-bezier(.2,.7,.2,1);
+  /* narrative captions — cinematic intertitles straight over the city,
+     no card box: gradient step number, one big line, one short line */
+  .panel{position:absolute;left:50%;top:clamp(86px,13vh,170px);transform:translateX(-50%) translateY(12px);
+    width:min(780px,94vw);text-align:center;opacity:0;transition:opacity .2s ease, transform .3s cubic-bezier(.2,.7,.2,1);
     will-change:opacity,transform}
-  .card{pointer-events:auto;background:linear-gradient(155deg,rgba(255,255,255,.93),rgba(255,255,255,.78));
-    backdrop-filter:blur(26px) saturate(1.5);-webkit-backdrop-filter:blur(26px) saturate(1.5);
-    border:1px solid rgba(255,255,255,.85);border-radius:26px;padding:36px 40px;box-shadow:0 28px 70px rgba(120,95,155,.2)}
-  .card::before{content:"";display:block;width:44px;height:4px;border-radius:4px;margin-bottom:20px;
-    background:linear-gradient(90deg,var(--lav),var(--pink))}
+  .cap{padding:26px 18px 34px;
+    background:radial-gradient(58% 86% at 50% 42%, rgba(255,255,255,.62), rgba(255,255,255,0) 78%)}
+  .cap__n{margin:0 0 12px;font-weight:800;font-size:clamp(14px,1.5vw,18px);letter-spacing:.34em;text-indent:.34em;
+    text-transform:uppercase;
+    background:linear-gradient(100deg,#EB74F4,#9A77EE 55%,#46AEE8);-webkit-background-clip:text;background-clip:text;
+    color:transparent;-webkit-text-fill-color:transparent}
   .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lav-deep);margin:0 0 14px}
-  .panel h1,.panel h2{margin:0 0 14px;font-weight:800;letter-spacing:-.03em;line-height:1.02;color:var(--ink)}
-  .panel h1{font-size:clamp(30px,4.6vw,46px)}
-  .panel h2{font-size:clamp(32px,4.6vw,50px)}
-  .panel p{margin:0;font-size:clamp(17px,1.7vw,21px);line-height:1.5;color:var(--ink-soft);font-weight:450}
+  .panel--hero h1{margin:0 0 14px}
+  .panel h2{margin:0;font-weight:800;letter-spacing:-.03em;line-height:1.05;color:var(--ink);
+    font-size:clamp(34px,5vw,58px);text-shadow:0 1px 22px rgba(255,255,255,.85)}
+  .cap__s{margin:14px auto 0;max-width:36ch;font-size:clamp(16px,2vw,22px);line-height:1.4;font-weight:550;
+    color:#3E3849;text-shadow:0 1px 16px rgba(255,255,255,.9)}
 
   /* the scroll hint at the very start */
   .hint{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;
@@ -92,11 +95,12 @@
   @keyframes rot{to{transform:rotate(360deg)}}
 
   @media (max-width:760px){
-    .panel{top:72px;bottom:auto;left:50%;transform:translateX(-50%) translateY(14px);width:min(392px,90vw)}
+    .panel{top:70px;bottom:auto;width:94vw}
     .panel--hero{top:64px;bottom:auto}
-    .card{padding:20px 22px;border-radius:20px}
-    .panel:not(.panel--hero) h2{font-size:clamp(22px,6vw,27px);margin-bottom:9px}
-    .panel:not(.panel--hero) p{font-size:clamp(14px,3.8vw,15.5px);line-height:1.46}
+    .cap{padding:16px 6px 22px}
+    .cap__n{font-size:12.5px;margin-bottom:9px}
+    .panel:not(.panel--hero) h2{font-size:clamp(27px,7.6vw,36px)}
+    .cap__s{margin-top:10px;font-size:clamp(14.5px,4vw,16.5px);max-width:30ch}
     .panel--hero h1{font-size:clamp(32px,9vw,44px)}
   }
   @media (prefers-reduced-motion:reduce){
@@ -128,7 +132,7 @@
 
   /* ===== detailed content below the journey — clean ivory/ink (client-page look) ===== */
   #content{position:relative;z-index:4;
-    --ink:#111010;--ink-soft:#7A746C;--muted:#7A746C;--lav:#9E8BAF;--cta:#6E5A82;--pink:#ED8CED;--cyan:#99F2F5;
+    --ink:#111010;--ink-soft:#6B645C;--muted:#6B645C;--lav:#9E8BAF;--cta:#6E5A82;--pink:#ED8CED;--cyan:#99F2F5;
     --hair:rgba(17,16,16,.07);--line:rgba(17,16,16,.10);
     --card-shadow:0 1px 2px rgba(17,16,16,.04);--card-hover:0 22px 50px rgba(17,16,16,.09);
     --ease:cubic-bezier(.16,1,.3,1);--r:22px;--r-lg:30px;
@@ -154,13 +158,16 @@
   .stat__n.acc{background:linear-gradient(110deg,var(--pink),var(--cta) 45%,var(--lav) 72%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
   .stat__l{margin-top:12px;font-size:13.5px;line-height:1.45;color:var(--muted)}
 
-  .bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .bcard{background:#fff;border:1px solid var(--hair);border-radius:var(--r);padding:30px 28px;box-shadow:var(--card-shadow);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+  .bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:bene}
+  .bcard{position:relative;background:#fff;border:1px solid var(--hair);border-radius:var(--r);padding:30px 28px;box-shadow:var(--card-shadow);transition:transform .3s var(--ease),box-shadow .3s var(--ease);counter-increment:bene}
+  .bcard::after{content:"0" counter(bene);position:absolute;top:24px;right:24px;font-size:15px;font-weight:800;letter-spacing:.06em;
+    background:linear-gradient(110deg,var(--pink),var(--cta) 55%,var(--cyan));-webkit-background-clip:text;background-clip:text;
+    color:transparent;-webkit-text-fill-color:transparent;opacity:.85}
   .bcard:hover{transform:translateY(-4px);box-shadow:var(--card-hover)}
   .bcard__ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;margin-bottom:16px;color:var(--cta);background:rgba(158,139,175,.12)}
   .bcard__ic svg{width:22px;height:22px}
   .bcard h3{margin:0 0 9px;font-size:18px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
-  .bcard p{margin:0;font-size:14.5px;line-height:1.55;color:var(--muted)}
+  .bcard p{margin:0;font-size:15px;line-height:1.6;color:var(--muted)}
 
   .shots{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
   .shot{margin:0;background:#fff;border:1px solid var(--hair);border-radius:var(--r);padding:12px;box-shadow:var(--card-shadow);text-align:center;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
@@ -292,37 +299,42 @@
     </article>
 
     <article class="panel" data-at="0.26">
-      <div class="card">
+      <div class="cap">
+        <p class="cap__n">01</p>
         <h2>Дело не в товаре</h2>
-        <p>Вещи у вас хорошие. Просто человек проходит мимо и не знает, что вы здесь.</p>
+        <p class="cap__s">Человек проходит мимо и просто не знает, что вы здесь.</p>
       </div>
     </article>
 
     <article class="panel" data-at="0.42">
-      <div class="card">
+      <div class="cap">
+        <p class="cap__n">02</p>
         <h2>Теперь вас видно</h2>
-        <p>LOOKTURA показывает магазин тем, кто прямо сейчас ищет одежду рядом. Витрина, каталог, лента: всё как в онлайне, только дорога ведёт к вам.</p>
+        <p class="cap__s">Вас находит тот, кто прямо сейчас ищет одежду рядом.</p>
       </div>
     </article>
 
     <article class="panel" data-at="0.58">
-      <div class="card">
+      <div class="cap">
+        <p class="cap__n">03</p>
         <h2>Увидел, забронировал, пришёл</h2>
-        <p>Покупатель откладывает вещь в пару касаний и доходит за ней. Без звонков «а мой размер есть?».</p>
+        <p class="cap__s">Пара касаний, и вещь отложена. Без «а мой размер есть?».</p>
       </div>
     </article>
 
     <article class="panel" data-at="0.74">
-      <div class="card">
-        <h2><span class="dot"></span>Маршрут прямо до двери</h2>
-        <p>Приложение ведёт его по городу к вашему входу. Не к соседям, к вам.</p>
+      <div class="cap">
+        <p class="cap__n">04</p>
+        <h2>Маршрут до самой двери</h2>
+        <p class="cap__s">Не к соседям. К вам.</p>
       </div>
     </article>
 
     <article class="panel" data-at="0.91" id="cta">
-      <div class="card">
+      <div class="cap">
+        <p class="cap__n">05</p>
         <h2>Ваш магазин в LOOKTURA</h2>
-        <p>Витрина, каталог, бронь и маршрут до самой двери. Ниже: как это устроено и сколько стоит.</p>
+        <p class="cap__s">Ниже: как это устроено и сколько стоит.</p>
         <a class="panel-cta" href="#more">Подробнее ↓</a>
       </div>
     </article>
@@ -540,7 +552,6 @@
   function paint(p) {
     d.setProgress(p);
     barfill.style.width = (p * 100).toFixed(1) + '%';
-    const mobile = matchMedia('(max-width:760px)').matches;
     for (const pan of panels) {
       let o;
       if (pan.form) {
@@ -551,9 +562,7 @@
       pan.el.style.opacity = o.toFixed(3);
       pan.el.style.transform = pan.hero
         ? `translateX(-50%) translateY(${(1 - o) * -10}px)`  // hero: pinned top-centre
-        : (mobile
-          ? `translateX(-50%) translateY(${(1 - o) * 14}px)`
-          : `translateY(-46%) translateY(${(1 - o) * 14}px)`);
+        : `translateX(-50%) translateY(${(1 - o) * 14}px)`;  // captions: top-centre everywhere
       pan.el.style.pointerEvents = (o > 0.6 ? 'auto' : 'none');
     }
   }
