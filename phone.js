@@ -20,7 +20,7 @@ const SCREEN_ASPECT = 0.462; // iPhone display w/h
 
 export function createPhoneCarousel(container, opts = {}) {
   const {
-    glbUrl = 'assets/models/iphone_17_pro.glb',
+    glbUrl = 'assets/models/iphone_17_pro.glb?v=2',   // bump ?v on every model re-export — GLB URLs are browser-cached hard
     screens = [],                 // [{ url, focus }]
     debug = false,
     reducedMotion = false,

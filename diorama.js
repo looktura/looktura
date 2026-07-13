@@ -23,7 +23,7 @@ const clamp01 = (t) => Math.max(0, Math.min(1, t));
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
 
 export function createDiorama(container, opts = {}) {
-  const { storeUrl = 'assets/models/store.glb', debug = false, reducedMotion = false,
+  const { storeUrl = 'assets/models/store.glb?v=2', debug = false, reducedMotion = false,
           damping = 0.0067, posDamp = 0.04, sway = 0.03 } = opts;
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
